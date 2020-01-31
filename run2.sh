@@ -1,5 +1,5 @@
 #!/bin/bash
 
-g++ -O2 ./cache.cpp -o cache
-sudo chrt --rr 99 ./cache > cache_info.txt
-python3 graph_maker.py cache_info.txt
+g++ cache_benchmark.cpp -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -pthread -o cache
+sudo chrt --rr 99 ./cache --benchmark_out=cache_info.csv --benchmark_out_format=csv
+python cache_graph_maker.py cache_info.csv
